@@ -1,0 +1,57 @@
+# Usar Ubuntu 20.04 como base
+FROM ubuntu:20.04
+
+# Configurar entorno no interactivo para evitar los diálogos durante la instalación
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Actualizar paquetes e instalar dependencias básicas
+RUN apt-get update && apt-get install -y \
+    tzdata \
+    git \
+    build-essential \
+    gcc-arm-none-eabi \
+    libnewlib-arm-none-eabi \
+    python3-pip \
+    wget \
+    nano \
+    curl
+
+# Instalar una versión más reciente de CMake (3.20.0)
+RUN apt-get remove -y cmake && \
+    apt-get update && \
+    apt-get install -y wget && \
+    wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0-linux-x86_64.sh && \
+    chmod +x cmake-3.20.0-linux-x86_64.sh && \
+    ./cmake-3.20.0-linux-x86_64.sh --skip-license --prefix=/usr/local
+
+# Instalar colcon-common-extensions con pip
+RUN python3 -m pip install -U pip && \
+    python3 -m pip install colcon-common-extensions
+
+# Instalar ROS 2 Foxy
+RUN apt-get update && \
+    apt-get install -y curl gnupg lsb-release && \
+    curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | apt-key add - && \
+    sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list' && \
+    apt-get update && \
+    apt-get install -y ros-foxy-ros-base
+
+# Configurar el entorno de ROS 2
+RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+
+# Clonar micro_ros_raspberrypi_pico_sdk
+RUN mkdir -p /micro_ros_ws/src && \
+    cd /micro_ros_ws/src && \
+    git clone -b foxy https://github.com/micro-ROS/micro_ros_raspberrypi_pico_sdk.git
+
+# Clonar el Pico SDK
+RUN cd /micro_ros_ws/src && \
+    git clone https://github.com/raspberrypi/pico-sdk.git && \
+    cd pico-sdk && \
+    git submodule update --init
+
+# Configurar micro-ROS
+WORKDIR /micro_ros_ws
+RUN apt-get install -y python3-rosdep && \
+    rosdep init && rosdep update && \
+    rosdep install --from-paths src --ignore-src -r -y

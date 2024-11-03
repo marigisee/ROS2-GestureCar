@@ -1,0 +1,25 @@
+{
+  "name": "Ubunutu 20.04 ROS2 Foxy",
+  "build": {
+    "dockerfile": "dockerfile",
+    "context": ".",
+    "args": {
+      "VARIANT": "ubuntu-20.04"
+    }
+  },
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt", "seccomp=unconfined"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-iot.vscode-ros",
+    "ms-vscode.cmake-tools",
+    "ms-python.python"
+  ],
+  "remoteUser": "root",
+  "postCreateCommand": "bash -c 'source /opt/ros/foxy/setup.sh'",
+  "workspaceFolder": "/micro_ros_ws"
+}
