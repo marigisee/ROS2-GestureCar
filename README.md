@@ -5,10 +5,10 @@ Este repositorio contiene el proyecto GestureBotCar, un auto robótico controlad
 
 - Raspberry Pi 3
 - Raspberry Pi Pico
-- ROS2 Foxy
+- ROS2 Humble
 - OpenCV
 - Python
-- Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
 - TensorFlow aarch64
 - MediaPipe 0.10.18
 
