@@ -9,6 +9,9 @@ En el archivo 'src/micro_ros_raspberrypi_pico/CMakeLists.txt' agregar las línea
 set(PICO_SDK_PATH "/micro_ros_ws/pico-sdk")
 include (${PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 `
+## Programa
+El codigo a modificar sera el archivo **pico_micro_ros_example.c**, aqui pondremos la logica de programación de acuerdo a nuestros requerimientos, en este caso el codigo para mover los motores se encuentra en este directorio
+
 ## Compilación
 `cd micro_ros_raspberrypi_pico_sdk`
 
