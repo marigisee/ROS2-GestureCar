@@ -91,21 +91,11 @@ Muy importante, el siguiente comando lo ejecutas DESDE CMD en tu computadora, no
 
 ```bash	
 
-scp rpi@192.168.0.244:{DIRECCION_IMAGEN} "{DIRECCCION_DONDE_VAMOS_A_GUARDAR_IMAGEN}"
+scp rpi@IP_DE_LA_RASPBERRY:{DIRECCION_IMAGEN} "{DIRECCCION_DONDE_VAMOS_A_GUARDAR_IMAGEN}"
 ````
 
 Ejemplo:
 
 ````bash
-scp rpi@IP_DE_LA_RASPBERRY:/home/rpi/prueba-opencv/imagen_mediapipe.jpg "C:\Users\user\Pictures\imagen_opencv.jpg"
+scp rpi@:/home/rpi/prueba-opencv/imagen_mediapipe.jpg "C:\Users\user\Pictures\imagen_opencv.jpg"
 ```
-
-##### Transferir imagenes al host
-
-1. Si instalaste numpy y te dice que la versión no es compatible
-
-```bash
-pip install numpy --upgrade
-```
-
-2. Si luego de abrir 
