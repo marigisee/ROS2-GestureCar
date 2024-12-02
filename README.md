@@ -1,6 +1,8 @@
 # ROS2-GestureCar
 Este repositorio contiene el proyecto GestureCar, un auto robótico controlado mediante reconocimiento de gestos. 
 
+![GestureCar](auto_1.jpg)
+
 ## Tecnologías y hardware utilizado
 
 - Raspberry Pi 3
